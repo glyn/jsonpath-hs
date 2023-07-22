@@ -9,9 +9,7 @@ module Data.JSONPath.Types
     SingularPathElement (..),
     SingularPath (..),
     FilterQuery(..),
-    FunctionExpr (..),
-    FunctionArgument (..),
-    FunctionName (..)
+    TypedFunctionExpr(..)
   )
 where
 
@@ -35,17 +33,8 @@ data SingularPathElement
   | Index Int
   deriving (Show, Eq)
 
-data FunctionExpr
-  = FunctionExpr FunctionName [FunctionArgument]
-  deriving (Show, Eq)
-
-type FunctionName = Text
-
-data FunctionArgument
-  = ArgLiteral Literal
-  | ArgFilterQuery FilterQuery
-  | ArgLogicalExpr FilterExpr
-  | ArgFunctionExpr FunctionExpr
+data TypedFunctionExpr
+  = TypedFunctionExpr Text -- TODO: define this type properly
   deriving (Show, Eq)
 
 data Literal
@@ -58,7 +47,7 @@ data Literal
 data Comparable
   = CmpLiteral Literal
   | CmpPath SingularPath
-  | CmpFun FunctionExpr
+  | CmpFun TypedFunctionExpr
   deriving (Show, Eq)
 
 data Condition
@@ -72,7 +61,7 @@ data Condition
 
 data FilterExpr
   = ExistsExpr FilterQuery
-  | ExistsFun FunctionExpr
+  | ExistsFun TypedFunctionExpr
   | ComparisonExpr Comparable Condition Comparable
   | And FilterExpr FilterExpr
   | Or FilterExpr FilterExpr

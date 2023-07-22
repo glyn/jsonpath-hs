@@ -29,6 +29,7 @@ library
       Data.JSONPath.Parser
       Data.JSONPath.Types
   other-modules:
+      Data.JSONPath.TypeChecker
       Paths_jsonpath
   hs-source-dirs:
       src
@@ -46,6 +47,7 @@ test-suite jsonpath-test
   type: exitcode-stdio-1.0
   main-is: Spec.hs
   other-modules:
+      Data.JSONPath.TypeChecker
       Data.JSONPathSpec
       Data.JSONPathCTSSpec
       Paths_jsonpath

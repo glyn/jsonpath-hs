@@ -4,6 +4,7 @@ module Spec.FunctionExprSpec (spec) where
 
 import Data.JSONPath.Parser(functionExpr)
 import Data.JSONPath.Types
+import Data.JSONPath.TypeChecker
 import Data.Text
 import Test.Hspec
 import Test.Hspec.Megaparsec

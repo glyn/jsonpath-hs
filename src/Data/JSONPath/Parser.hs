@@ -19,6 +19,7 @@ import Text.Megaparsec as P
 import Text.Megaparsec.Char (char, digitChar, space, string)
 import qualified Text.Megaparsec.Char.Lexer as L
 import Text.Megaparsec.Debug (dbg)
+import Data.JSONPath.TypeChecker
 
 type Parser = P.ParsecT Void Text Identity
 
@@ -212,7 +213,7 @@ comparable :: Parser a -> Parser Comparable
 comparable endParser = do
   CmpLiteral <$> compLiteral endParser
     <|> CmpPath <$> singularPath endParser
-    <|> CmpFun <$> functionExpr endParser
+    <|> CmpFun . checkTypes <$> functionExpr endParser
 
 compLiteral :: Parser a -> Parser Literal
 compLiteral endParser = do
